@@ -2,11 +2,11 @@ const fs = require("fs");
 
 function findLanguage(node, languageName)
  {
-  // мова знайдена
+
   if (node.Node.Language.Name.toLowerCase() === languageName.toLowerCase()) {
     return node.Node.Label;
   }
-  // рекурсивний випадок - шукати у дочірніх вузлах
+
   else {
     for (let i = 0; i < node.Children.length; i++) {
       const childNode = node.Children[i];
@@ -19,15 +19,14 @@ function findLanguage(node, languageName)
   }
 }
 
-// Зчитуємо дерево з файлу
 const tree = JSON.parse(fs.readFileSync("./language-tree.json"));
 
-// знаходження мови за повною назвою
+
 const fullName = "Sud Oranais-Gourara";
 const result = findLanguage(tree, fullName);
 console.log(`The way to language "${fullName}": ${result}`);
 
-// знаходження мови за частковою назвою
+
 const partialName = "Gourara";
 let result2 = "";
 for (let i = 0; i < tree.Children.length; i++) {
